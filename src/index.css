@@ -97,7 +97,14 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, hsl(var(--primary)/0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--primary)/0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+body {
     @apply bg-background text-foreground;
   }
 }

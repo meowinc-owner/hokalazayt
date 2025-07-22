@@ -109,9 +109,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Background Effects */}
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-muted/20 -z-10" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1),transparent_70%)] -z-10" />
+      {/* Animated Background Effects */}
+      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-muted/20 animate-pulse-slow -z-10" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15),transparent_70%)] animate-glow-pulse -z-10" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--secondary)/0.1),transparent_50%)] animate-float -z-10" />
+      <div className="fixed inset-0 bg-grid-pattern opacity-5 mix-blend-overlay animate-grid-flow -z-10" />
 
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* Channel Header */}
@@ -143,8 +145,11 @@ const Index = () => {
               {filteredVideos.map((video, index) => (
                 <div
                   key={video.id}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                  className="animate-fade-in"
+                  style={{ 
+                    animationDelay: `${index * 100}ms`,
+                    transform: `translateY(${Math.sin(index * 0.5) * 10}px)`
+                  }}
+                  className="animate-fade-in hover:scale-105 transition-transform duration-300 ease-out hover:z-10 relative"
                 >
                   <VideoCard video={video} />
                 </div>
