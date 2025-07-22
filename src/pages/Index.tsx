@@ -23,24 +23,35 @@ const Index = () => {
     try {
       setLoading(true);
       
-      // For demo purposes, we'll use a popular channel ID (MrBeast)
-      const channelId = 'UCX6OQ3DkcsbYNE6H8uQQuVA';
+      // Try to get the authenticated user's channel first
+      // If that fails, we'll use a fallback or prompt for channel ID
+      let channelId: string;
       
-      const [channelData, videosData] = await Promise.all([
-        getChannelInfo(channelId),
-        getChannelVideos(channelId)
-      ]);
+      try {
+        // First try to search for a specific channel or get channel data
+        // You can replace this with your channel ID if known
+        channelId = 'UCX6OQ3DkcsbYNE6H8uQQuVA'; // Replace with your actual channel ID
+        
+        const [channelData, videosData] = await Promise.all([
+          getChannelInfo(channelId),
+          getChannelVideos(channelId)
+        ]);
 
-      setChannel(channelData);
-      setVideos(videosData);
-      setFilteredVideos(videosData);
+        setChannel(channelData);
+        setVideos(videosData);
+        setFilteredVideos(videosData);
 
-      // Calculate total likes and comments
-      const likes = videosData.reduce((sum, video) => sum + parseInt(video.statistics.likeCount), 0);
-      const comments = videosData.reduce((sum, video) => sum + parseInt(video.statistics.commentCount), 0);
-      
-      setTotalLikes(likes);
-      setTotalComments(comments);
+        // Calculate total likes and comments
+        const likes = videosData.reduce((sum, video) => sum + parseInt(video.statistics.likeCount), 0);
+        const comments = videosData.reduce((sum, video) => sum + parseInt(video.statistics.commentCount), 0);
+        
+        setTotalLikes(likes);
+        setTotalComments(comments);
+        
+      } catch (error) {
+        console.error('Error with channel ID, trying alternative approach:', error);
+        throw error;
+      }
 
     } catch (error) {
       console.error('Error loading channel data:', error);
