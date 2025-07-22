@@ -30,7 +30,7 @@ const Index = () => {
       try {
         // First try to search for a specific channel or get channel data
         // You can replace this with your channel ID if known
-        channelId = 'UCX6OQ3DkcsbYNE6H8uQQuVA'; // Replace with your actual channel ID
+        channelId = 'UCDHSITTwE00VRqNK4eaKw5w'; // Your YouTube channel ID
         
         const [channelData, videosData] = await Promise.all([
           getChannelInfo(channelId),
